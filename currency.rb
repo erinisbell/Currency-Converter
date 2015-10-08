@@ -1,13 +1,22 @@
+require 'pry'
 require_relative 'codeerror'
 
-class Currency < CodeError
+class Currency < DifferentCurrencyCodeError
   attr_accessor :amount, :currency_code
 
 
   def initialize amount, currency_code
-    @amount = amount 
-    @currency_code = currency_code
+    @amount = amount.match /[\d]/
+    @currency_code = currency_code.match  /[\D]/
   end
+
+  #currencyticker = {
+   # "USD" => { "$", }
+   # "EUR" => {"€", } 
+    #{}"CAD" => {"" }
+    #{}"" => {"£", } 
+    # }
+
 
 
   def to_s
@@ -51,13 +60,14 @@ end
 end 
 
 
+
 begin
-puts currency1 = Currency.new(2, "USD")
-puts currency2 = Currency.new(2, "USD")
+puts currency1 = Currency.new("$2", "EUR")
+puts currency2 = Currency.new("$2", "CAD")
 puts currency1.currency_code == currency2.currency_code
 puts currency1 + currency2 
 puts currency1 - currency2
 puts currency1 * currency2
-rescue
+rescue DifferentCurrencyCodeError
  puts "Not the same code, bro"
 end 
