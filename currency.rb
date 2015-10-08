@@ -17,14 +17,15 @@ class Currency
   @amount <=> self.amount.id
 end 
 
-def add obj1, obj2 
-  [obj1] + [obj2]
-end
+
+#def + amount
+ # if self.amount == amount
+ #  added_amount = cur.current_amount + self.current_amount
+# end
 
 end 
 
 
-puts currency1 = Currency.new(1, "US").to_s
-puts currency2 = Currency.new(2, "US").to_s
+puts currency1 = Currency.new(1, "USD")
+puts currency2 = Currency.new(2, "USD")
 puts currency1 != currency2
-puts currency1 + currency2
