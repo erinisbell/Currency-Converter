@@ -1,4 +1,6 @@
-class Currency
+require_relative 'codeerror'
+ 
+class Currency < CodeError
   attr_accessor :amount, :currency_code
 
 
@@ -13,14 +15,18 @@ class Currency
   end
 
   def <=> currency 
-    self.currency_code == currency.currency_code
+    if self.currency_code == currency.currency_code
+      true
+    else
+      raise DifferentCurrencyCodeError
+    end
   end 
 
   def + obj
     if self.currency_code == obj.currency_code
       return Currency.new(currency_code, obj.amount + self.amount)
     else 
-      puts "Not the same Country Code!"
+      raise DifferentCurrencyCodeError
     end 
   end
 
@@ -29,15 +35,19 @@ class Currency
     if self.currency_code = obj.currency_code
       return Currency.new(currency_code, obj.amount - self.amount)
     else 
-     puts "Not the same Country Code"
+     raise DifferentCurrencyCodeError
    end
  end 
 
 end 
 
 
+begin
 puts currency1 = Currency.new(1, "USD")
-puts currency2 = Currency.new(2, "USD")
+puts currency2 = Currency.new(2, "CAD")
 puts currency1.currency_code == currency2.currency_code
-puts currency1 + currency2
+puts currency1 + currency2 
 puts currency1 - currency2
+rescue
+ puts "Not the same code, dude"
+end 
