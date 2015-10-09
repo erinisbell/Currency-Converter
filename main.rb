@@ -1,13 +1,6 @@
 require_relative 'currency'
 require_relative 'converter'
 
-puts "What Currency Would you like to Convert?"
-result = gets.chomp
-
-puts "How much would you like to convert?"
-answer = gets.chomp.to_f
-
-
 
 HASH = {
   "USD" => {"USD" => 1, "EUR" => 2, "GBP" =>  4},
