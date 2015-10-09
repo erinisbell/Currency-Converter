@@ -9,15 +9,23 @@ HASH = {
 
 }
 
- 
-conversion_rates = Converter.new(HASH)
-money = Currency.new("$1.00")
-erinsMulah = Currency.new(1, "USD")
-
-puts conversion_rates.convert(erinsMulah, "GBP")
-
 
 begin 
   rescue UnknownCurrencyCodeError
   puts "I dont know that country code. Try Again."
 end 
+
+
+puts "What Currency Would You Like to Convert?"
+user = gets.chomp
+
+
+puts "What Amount Would You Like to Convert?"
+answer = gets.chomp.to_f
+
+puts "What Would You Like To Convert To?"
+answer2 = gets.chomp
+
+conversion_rates = Converter.new(HASH)
+user_money = Currency.new(answer, user)
+puts conversion_rates.convert(user_money, answer2)
