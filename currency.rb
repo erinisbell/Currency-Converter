@@ -6,21 +6,14 @@ class Currency < DifferentCurrencyCodeError
 
 
   def initialize amount, currency_code = nil
-    @amount = amount[/[\d]/].to_i
-    @currency_code = currency_code
-    if currency_code == []
-      return nil
+    if @amount.is_a? String
+      @amount = amount[/[\d]/].to_f
+      @currency_code = /[\D]/
+    else
+      @amount = amount
+      @currency_code = currency_code
     end
   end
-
-  #currencyticker = {
-   # "USD" => { "$", }
-   # "EUR" => {"€", } 
-    #{}"CAD" => {"" }
-    #{}"" => {"£", } 
-    # }
-
-
 
     def to_s
       "#{@amount} : #{currency_code}"
@@ -50,7 +43,7 @@ class Currency < DifferentCurrencyCodeError
        raise DifferentCurrencyCodeError
      end
    end 
-   
+
 
    def * obj
     if self.currency_code = obj.currency_code
@@ -60,16 +53,7 @@ class Currency < DifferentCurrencyCodeError
 
 end 
 
-
-
 begin
-  puts currency1 = Currency.new("2", "CAD")
-  puts currency2 = Currency.new("2", "CAD")
-  puts currency3 = Currency.new("$3")
-  puts currency1 == currency2
-  puts currency1 + currency2 
-  puts currency1 - currency2
-  puts currency1 * currency2
 rescue DifferentCurrencyCodeError
  puts "Not the same code. Try Aagain"
 end 
