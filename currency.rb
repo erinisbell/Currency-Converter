@@ -8,6 +8,9 @@ class Currency < DifferentCurrencyCodeError
   def initialize amount, currency_code = nil
     @amount = amount[/[\d]/].to_i
     @currency_code = currency_code
+    if currency_code == []
+      return nil
+    end
   end
 
   #currencyticker = {
@@ -19,54 +22,54 @@ class Currency < DifferentCurrencyCodeError
 
 
 
-  def to_s
-    "#{@amount} : #{currency_code}"
-  end
+    def to_s
+      "#{@amount} : #{currency_code}"
+    end
 
-  def <=> currency 
-    if self.currency_code == currency.currency_code
-      true
-    else
-      raise DifferentCurrencyCodeError
+    def <=> currency 
+      if self.currency_code == currency.currency_code
+        true
+      else
+        raise DifferentCurrencyCodeError
+      end
+    end 
+
+    def + obj
+      if self.currency_code == obj.currency_code
+        return Currency.new(currency_code, obj.amount + self.amount)
+      else 
+        raise DifferentCurrencyCodeError
+      end 
+    end
+
+
+    def - obj
+      if self.currency_code = obj.currency_code
+        return Currency.new(currency_code, obj.amount - self.amount)
+      else 
+       raise DifferentCurrencyCodeError
+     end
+   end 
+   
+
+   def * obj
+    if self.currency_code = obj.currency_code
+      return Currency.new(currency_code, obj.amount * self.amount)
     end
   end 
-
-  def + obj
-    if self.currency_code == obj.currency_code
-      return Currency.new(currency_code, obj.amount + self.amount)
-    else 
-      raise DifferentCurrencyCodeError
-    end 
-  end
-
-
-  def - obj
-    if self.currency_code = obj.currency_code
-      return Currency.new(currency_code, obj.amount - self.amount)
-    else 
-     raise DifferentCurrencyCodeError
-   end
- end 
- 
-
-def * obj
-  if self.currency_code = obj.currency_code
-    return Currency.new(currency_code, obj.amount * self.amount)
- end
-end 
 
 end 
 
 
 
 begin
-puts currency1 = Currency.new("2", "CAD")
-puts currency2 = Currency.new("2", "CAD")
-puts currency3 = Currency.new("$3")
-puts currency1 == currency2
-puts currency1 + currency2 
-puts currency1 - currency2
-puts currency1 * currency2
+  puts currency1 = Currency.new("2", "CAD")
+  puts currency2 = Currency.new("2", "CAD")
+  puts currency3 = Currency.new("$3")
+  puts currency1 == currency2
+  puts currency1 + currency2 
+  puts currency1 - currency2
+  puts currency1 * currency2
 rescue DifferentCurrencyCodeError
- puts "Not the same code, bro"
+ puts "Not the same code. Try Aagain"
 end 
