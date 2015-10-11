@@ -1,3 +1,4 @@
-User should be able to enter 'USD', 'EUR', or 'GBP' into the program along with the corresponding symbols for each currency
-and the program will be able to convert the amount in the correct amount if they were exchanging currencies. 
+User should be able to enter 'USD', 'EUR', or 'GBP' into the program along with the corresponding symbols for 
+each currencyand the program will be able to convert the amount in the correct amount if they were exchanging 
+currencies. 
 
