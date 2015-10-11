@@ -1,5 +1,7 @@
 require_relative 'currency'
 require_relative 'converter'
+require_relative 'UnknownCurrencyCodeError'
+require_relative 'codeerror'
 
 
 HASH = {
@@ -13,11 +15,12 @@ HASH = {
 }
 
 
-
-
-
-puts "What Currency Would You Like to Convert?"
-user = gets.chomp
+begin
+  puts "What Currency Would You Like to Convert?"
+  user = gets.chomp
+rescue UnknownCurrencyCodeError
+ puts "Not the same code. Try Aagain"
+end 
 
 
 puts "What Amount Would You Like to Convert?"
